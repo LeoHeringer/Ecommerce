@@ -7,7 +7,7 @@ use \Hcode\Model;
 
 class Address extends Model {
 
-const SESSION_ERROR = "AddressError";
+    const SESSION_ERROR = "AddressError";
 
     public static function getCEP($nrcep)
     {
@@ -53,10 +53,11 @@ const SESSION_ERROR = "AddressError";
 
         $sql = new Sql();
 
-        $results = $sql->select("CALL sp_addresses_save(:idaddress, :idperson, :desaddress, :descomplement, :descity, :desstate, :descountry, :deszipcode, :desdistrict)", [
+        $results = $sql->select("CALL sp_addresses_save(:idaddress, :idperson, :desaddress, :desnumber, :descomplement, :descity, :desstate, :descountry, :deszipcode, :desdistrict)", [
             ':idaddress'=>$this->getidaddress(),
             ':idperson'=>$this->getidperson(),
             ':desaddress'=>utf8_decode($this->getdesaddress()),
+            ':desnumber'=>$this->getdesnumber(),
             ':descomplement'=>utf8_decode($this->getdescomplement()),
             ':descity'=>utf8_decode($this->getdescity()),
             ':desstate'=>utf8_decode($this->getdesstate()),
@@ -95,6 +96,7 @@ const SESSION_ERROR = "AddressError";
         $_SESSION[Address::SESSION_ERROR] = NULL;
 
     }
+
 }
 
  ?>
